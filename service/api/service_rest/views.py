@@ -8,16 +8,17 @@ import json
 # Create your views here.
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["color", "year", "import_vin"]
+    properties = ["vo_vin"]
 
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
         "name",
         "employee_number"
     ]
 
-class AppointmentEncoder(ModelEncoder):
+class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
     properties = [
         "vin",
@@ -25,11 +26,11 @@ class AppointmentEncoder(ModelEncoder):
         "date",
         "time",
         "reason",
-
+        "is_vip"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
-        "automobile": AutomobileVOEncoder()
+        # "automobile": AutomobileVOEncoder()
     }
 
     def get_extra_data(self, o):
@@ -57,7 +58,31 @@ def list_appointments(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
-            appointments,
-            encoder=AppointmentEncoder,
+            {"appointments": appointments},
+            encoder=AppointmentDetailEncoder,
+            safe=False
+        )
+    else:
+        content = json.loads(request.body)
+
+        print(content)
+        technician = Technician.objects.get(id=content["technician"])
+        content["technician"] = technician
+        try:
+            import_vin = AutomobileVO.objects.get(import_vin=content["vin"])
+            content["vin"] = import_vin
+            content["is_vip"] = True
+        except AutomobileVO.DoesNotExist:
+            content["is_vip"] = False
+            # return JsonResponse(
+            #     {"message": "Invalid automobile"},
+            #     status = 400,
+            # )
+        print(content)
+
+        appointment = Appointment.objects.create(**content)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
             safe=False
         )

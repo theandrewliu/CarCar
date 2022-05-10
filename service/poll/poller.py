@@ -23,10 +23,7 @@ def poll():
             for auto in content["autos"]:
                 print(auto)
                 AutomobileVO.objects.update_or_create(
-                    import_href = auto["href"],
-                    color = auto["color"],
-                    year = auto["year"],
-                    import_vin = auto["vin"]
+                    vo_vin = auto["vin"]
                 )
             print("imported")
         except Exception as e:
