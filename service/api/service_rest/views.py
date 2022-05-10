@@ -22,6 +22,7 @@ class TechnicianEncoder(ModelEncoder):
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
         "vin",
         "customer_name",
         "starts",
@@ -71,10 +72,6 @@ def list_appointments(request):
             content["is_vip"] = True
         except AutomobileVO.DoesNotExist:
             content["is_vip"] = False
-            # return JsonResponse(
-            #     {"message": "Invalid automobile"},
-            #     status = 400,
-            # )
 
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
@@ -82,3 +79,29 @@ def list_appointments(request):
             encoder=AppointmentDetailEncoder,
             safe=False
         )
+    
+@require_http_methods(["DELETE"])
+def delete_appointments(request, pk):
+    try:
+        appointment = Appointment.objects.get(id=pk)
+        appointment.delete()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe=False,
+        )
+    except Appointment.DoesNotExist:
+        return JsonResponse({"message":"Does not exist"})
+
+@require_http_methods(["DELETE"])
+def delete_technician(request, pk):
+    try:
+        technician = Technician.objects.get(id=pk)
+        technician.delete()
+        return JsonResponse(
+            technician,
+            encoder=TechnicianEncoder,
+            safe=False,
+        )
+    except Technician.DoesNotExist:
+        return JsonResponse({"message":"Does not exist"})

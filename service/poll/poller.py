@@ -21,7 +21,7 @@ def poll():
             response = requests.get(url)
             content = json.loads(response.content)
             for auto in content["autos"]:
-                print(auto)
+                # print(auto)
                 AutomobileVO.objects.update_or_create(
                     vo_vin = auto["vin"]
                 )
