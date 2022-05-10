@@ -6,6 +6,7 @@ import ManufacturerForm from './Inventory/ManufacturerForm';
 import ServiceTechList from './Service/ServiceTechList';
 import ServiceTechForm from './Service/ServiceTechForm';
 import ServiceAppointmentList from './Service/ServiceAppointmentList'
+import ServiceAppointmentForm from './Service/ServiceAppointmentForm'
 
 function App(props) {
   return (
@@ -20,7 +21,7 @@ function App(props) {
           </Route>
           <Route path="service">
             <Route index element={<ServiceAppointmentList appointments={props.appointments} />} />
-            {/* <Route path="new" element={<ServiceForm />}/> */}
+            <Route path="new" element={<ServiceAppointmentForm />}/>
           </Route>
           <Route path="technicians">
             <Route index element={<ServiceTechList technicians={props.technicians} />} />

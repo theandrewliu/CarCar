@@ -35,6 +35,7 @@ class ServiceAppointmentForm extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
+        data.starts = data.date+"T"+data.time
         delete data.time;
         delete data.date;
         delete data.technicians;
@@ -96,35 +97,39 @@ class ServiceAppointmentForm extends React.Component {
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Add shoes!</h1>
+                        <h1>Create a Service Appointment</h1>
                         <form onSubmit={this.handleSubmit} id="create-appointment-form">
                         <div className="form-floating mb-3">
                             <input onChange={this.handleVinChange} value={this.state.vin} placeholder="Vin Number" required type="text" name="vin" id="vin" className="form-control" />
                             <label htmlFor="vin">Vin Number</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={this.handleChangeModel} value={this.state.model_name} placeholder="Model" required type="text" name="model_name" id="model_name" className="form-control" />
-                            <label htmlFor="model_name">Model</label>
+                            <input onChange={this.handleCustomerNameChange} value={this.state.customer_name} placeholder="Customer Name" required type="text" name="customer_name" id="customer_name" className="form-control" />
+                            <label htmlFor="customer_name">Customer Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={this.handleChangeColor} value={this.state.color} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
-                            <label htmlFor="color">Color</label>
+                            <input onChange={this.handleDateChange} value={this.state.date} placeholder="Date" required type="date" name="date" id="date" className="form-control" />
+                            <label htmlFor="date">Date</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={this.handleChangePicture} value={this.state.picture_url} placeholder="Picture" required type="text" name="picture_url" id="picture_url" className="form-control" />
-                            <label htmlFor="picture_url">Picture URL</label>
+                            <input onChange={this.handleTimeChange} value={this.state.time} placeholder="Time" required type="time" name="time" id="time" className="form-control" />
+                            <label htmlFor="time">Time</label>
+                        </div>
+                        <div className="form-floating mb-3">
+                            <input onChange={this.handleReasonChange} value={this.state.reason} placeholder="Reason" required type="text" name="reason" id="reason" className="form-control" />
+                            <label htmlFor="reason">Reason</label>
                         </div>
                         <div className="mb-3">
-                            <select onChange={this.handleChangeBin} value={this.state.bin} required name="bin" id="bin" className="form-select">
-                            <option value="">Choose a bin</option>
-                            {this.state.bins.map(bin => {
+                            <select onChange={this.handleTechnicianChange} value={this.state.technician} required name="technician" id="technician" className="form-select">
+                            <option value="">Select a Technician</option>
+                            {this.state.technicians.map(technician => {
                                 return (
-                                <option key={bin.id} value={bin.href}>{bin.closet_name.charAt(0).toUpperCase() + bin.closet_name.slice(1)} Bin:{bin.bin_number} Size:{bin.bin_size}</option>
+                                <option key={technician.id} value={technician.id}>{technician.name}</option>
                                 )
                             })}
                             </select>
                         </div>
-                        <button className="btn btn-primary">Add</button>
+                        <button className="btn btn-primary">Create Appointment</button>
                         </form>
                     </div>
                 </div>
