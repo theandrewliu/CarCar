@@ -27,7 +27,8 @@ class AppointmentDetailEncoder(ModelEncoder):
         "customer_name",
         "starts",
         "reason",
-        "is_vip"
+        "is_vip",
+        "is_finished"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
