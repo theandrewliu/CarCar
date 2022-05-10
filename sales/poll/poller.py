@@ -1,3 +1,4 @@
+from enum import auto
 import django
 import os
 import sys
@@ -11,13 +12,23 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
 
 def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            # Write your polling logic, here
-            pass
+            response = requests.get("http://inventory-api:8000/x")
+            content = json.loads(response.content)
+            for automobile in content["automobile"]:
+                AutomobileVO.objects.update_or_create(
+                    import_name = automobile["model.name"],
+                    defaults = {
+                        "color": automobile["color"],
+                        "year": automobile["year"],
+                        "vin": automobile["vin"],
+                    },
+                )
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

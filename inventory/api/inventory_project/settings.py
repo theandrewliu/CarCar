@@ -27,10 +27,7 @@ SECRET_KEY = 'django-insecure-h_*^s%*58o(szd%qaz!(^ky%nah+=yw+d=mkp_)01(r1@*$2t%
 DEBUG = True
 
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "inventory-api",
-]
+ALLOWED_HOSTS = [ "localhost", "inventory-api",]
 
 # Application definition
 

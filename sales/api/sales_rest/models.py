@@ -10,12 +10,7 @@ class AutomobileVO(models.Model):
     color = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
-
-    model = models.ForeignKey(
-        VehicleModel,
-        related_name="automobiles",
-        on_delete=models.CASCADE,
-    )
+    import_name = models.CharField()
 
 
 class SalesPerson(models.Model):
@@ -37,6 +32,8 @@ class Customer(models.Model):
 
 
 class SalesRecord(models.Model):
+    salesprice = models.BigIntegerField()
+
     automobile = models.ForeignKey(
         AutomobileVO,
         related_name="automobiles",
@@ -52,4 +49,3 @@ class SalesRecord(models.Model):
         related_name="customer",
         on_delete=models.CASCADE,
     )
-    salesprice = models.BigIntegerField()

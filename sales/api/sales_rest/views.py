@@ -11,7 +11,7 @@ class AutomobileVODetailEncoder(ModelEncoder):
         "vin",
         "color",
         "year",
-        "model",
+        "import_name",
     ]
 
 
@@ -37,6 +37,7 @@ class SalesPersonListEncoder(ModelEncoder):
             "salesprice": o.salesrecord.salesprice,
         }
 
+
 class CustomerDetailEncoder(ModelEncoder):
     model = Customer
     properties = [
@@ -59,6 +60,7 @@ class SalesRecordDetailEncoder(ModelEncoder):
         "salesperson": SalesPersonDetailEncoder(),
         "customer": CustomerDetailEncoder(),
         }
+
 
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
