@@ -1,4 +1,4 @@
-from ast import mod
+from django.urls import reverse
 from django.db import models
 
 
@@ -49,3 +49,9 @@ class SalesRecord(models.Model):
         related_name="customer",
         on_delete=models.CASCADE,
     )
+
+    def get_api_url(self):
+        return reverse("api_automobiles", kwargs={"pk": self.pk})
+
+    def __str__(self):
+        return self.salesperson

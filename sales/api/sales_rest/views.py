@@ -1,10 +1,9 @@
 import json
-from urllib import response
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from inventory.api.common.json import ModelEncoder
-from sales.api.sales_rest.models import AutomobileVO, Customer, SalesPerson, SalesRecord
+from common.json import ModelEncoder
+from .models import AutomobileVO, Customer, SalesPerson, SalesRecord
 
 # Create your views here.
 
@@ -47,7 +46,6 @@ class CustomerDetailEncoder(ModelEncoder):
         "phone",
     ]
 
-#Create a sale record
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord
     properties = [ 
@@ -93,7 +91,7 @@ def api_salesperson(request, pk):
             response.status_code = 404
             return response
 
-    elif request.method == "Delete":
+    elif request.method == "DELETE":
         try:
             sales_person = SalesPerson.objects.get(id=pk)
             sales_person.delete()
@@ -191,7 +189,7 @@ def api_customer(request, pk):
             content = json.loads(request.body)
             customers = Customer.objects.get(id=pk)
 
-            props = ["name", "address", "phone",]
+            props = ["name", "address", "phone"]
             for prop in props:
                 if prop in content:
                     setattr(customers, prop, content[prop])
