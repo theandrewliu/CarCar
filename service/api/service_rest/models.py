@@ -18,8 +18,7 @@ class Technician(models.Model):
 class Appointment(models.Model):
     vin = models.CharField(max_length=50, unique=True)
     customer_name = models.CharField(max_length=200)
-    date = models.DateField()
-    time = models.TimeField()
+    starts = models.DateTimeField()
     reason = models.TextField()
     is_vip = models.BooleanField(default=False)
 
@@ -28,12 +27,6 @@ class Appointment(models.Model):
         related_name="technician",
         on_delete=models.PROTECT
     )
-
-    # import_vin = models.ForeignKey(
-    #     AutomobileVO,
-    #     related_name="automobiles",
-    #     on_delete=models.CASCADE
-    # )
 
     def get_api_url(self):
         return reverse("api_appointment", kwargs={"pk": self.pk})

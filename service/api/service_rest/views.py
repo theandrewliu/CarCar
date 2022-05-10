@@ -24,14 +24,11 @@ class AppointmentDetailEncoder(ModelEncoder):
     properties = [
         "vin",
         "customer_name",
-        # "date",
-        # "time",
+        "starts",
         "reason",
         "is_vip"
     ]
     encoders = {
-        "date": DateEncoder(),
-        "time": DateEncoder(),
         "technician": TechnicianEncoder(),
     }
 
@@ -78,7 +75,6 @@ def list_appointments(request):
             #     {"message": "Invalid automobile"},
             #     status = 400,
             # )
-        print(content)
 
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
