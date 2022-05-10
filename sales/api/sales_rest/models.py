@@ -21,9 +21,7 @@ class AutomobileVO(models.Model):
 class SalesPerson(models.Model):
     name = models.CharField(max_length=200)
     employee_id = models.PositiveSmallIntegerField()
-    salesreport = models.ManyToManyField(
-        
-    )
+    
 
     def __str__(self):
         return self.name
@@ -54,4 +52,4 @@ class SalesRecord(models.Model):
         related_name="customer",
         on_delete=models.CASCADE,
     )
-    salesPrice = models.BigIntegerField()
+    salesprice = models.BigIntegerField()

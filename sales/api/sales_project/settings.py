@@ -82,7 +82,7 @@ DJWTO_MODE = "TWO-COOKIES"
 
 DJWTO_ACCESS_TOKEN_LIFETIME = None
 
-ROOT_URLCONF = 'hats_project.urls'
+ROOT_URLCONF = 'sales_project.urls'
 
 TEMPLATES = [
     {
