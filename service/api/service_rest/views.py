@@ -1,35 +1,36 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+
 from .models import AutomobileVO, Technician, Appointment
-from common.json import ModelEncoder
+from common.json import ModelEncoder,DateEncoder
 import json
 
 # Create your views here.
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["color", "year", "import_vin"]
+    properties = ["vo_vin"]
 
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
+        "id",
         "name",
         "employee_number"
     ]
 
-class AppointmentEncoder(ModelEncoder):
+class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
     properties = [
+        "id",
         "vin",
         "customer_name",
-        "date",
-        "time",
+        "starts",
         "reason",
-
+        "is_vip"
     ]
     encoders = {
         "technician": TechnicianEncoder(),
-        "automobile": AutomobileVOEncoder()
     }
 
     def get_extra_data(self, o):
@@ -57,7 +58,50 @@ def list_appointments(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
-            appointments,
-            encoder=AppointmentEncoder,
+            {"appointments": appointments},
+            encoder=AppointmentDetailEncoder,
             safe=False
         )
+    else:
+        content = json.loads(request.body)
+
+        technician = Technician.objects.get(id=content["technician"])
+        content["technician"] = technician
+        try:
+            import_vin = AutomobileVO.objects.get(vo_vin=content["vin"])
+            content["is_vip"] = True
+        except AutomobileVO.DoesNotExist:
+            content["is_vip"] = False
+
+        appointment = Appointment.objects.create(**content)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe=False
+        )
+    
+@require_http_methods(["DELETE"])
+def delete_appointments(request, pk):
+    try:
+        appointment = Appointment.objects.get(id=pk)
+        appointment.delete()
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentDetailEncoder,
+            safe=False,
+        )
+    except Appointment.DoesNotExist:
+        return JsonResponse({"message":"Does not exist"})
+
+@require_http_methods(["DELETE"])
+def delete_technician(request, pk):
+    try:
+        technician = Technician.objects.get(id=pk)
+        technician.delete()
+        return JsonResponse(
+            technician,
+            encoder=TechnicianEncoder,
+            safe=False,
+        )
+    except Technician.DoesNotExist:
+        return JsonResponse({"message":"Does not exist"})

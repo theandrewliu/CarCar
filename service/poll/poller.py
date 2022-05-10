@@ -21,12 +21,9 @@ def poll():
             response = requests.get(url)
             content = json.loads(response.content)
             for auto in content["autos"]:
-                print(auto)
+                # print(auto)
                 AutomobileVO.objects.update_or_create(
-                    import_href = auto["href"],
-                    color = auto["color"],
-                    year = auto["year"],
-                    import_vin = auto["vin"]
+                    vo_vin = auto["vin"]
                 )
             print("imported")
         except Exception as e:
