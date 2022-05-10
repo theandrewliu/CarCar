@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
+import ManufacturerForm from './Inventory/ManufacturerForm';
 import ServiceTechList from './Service/ServiceTechList';
 import ServiceAppointmentList from './Service/ServiceAppointmentList'
 
@@ -14,6 +15,7 @@ function App(props) {
           <Route path="/" element={<MainPage />}/>
           <Route path="manufacturers">
             <Route index element={<ManufacturerList manufacturers={props.manufacturers} />}/>
+            <Route path="new" element={<ManufacturerForm />}/>
           </Route>
           <Route path="service">
             <Route index element={<ServiceAppointmentList appointments={props.appointments} />} />
