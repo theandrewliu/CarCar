@@ -4,6 +4,7 @@ import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
 import ServiceTechList from './Service/ServiceTechList';
+import ServiceTechForm from './Service/ServiceTechForm';
 import ServiceAppointmentList from './Service/ServiceAppointmentList'
 
 function App(props) {
@@ -23,6 +24,7 @@ function App(props) {
           </Route>
           <Route path="technicians">
             <Route index element={<ServiceTechList technicians={props.technicians} />} />
+            <Route path="new" element={<ServiceTechForm/>}/>
           </Route>
           <Route path="sales">
 
