@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+
 from .models import AutomobileVO, Technician, Appointment
-from common.json import ModelEncoder
+from common.json import ModelEncoder,DateEncoder
 import json
 
 # Create your views here.
@@ -23,14 +24,15 @@ class AppointmentDetailEncoder(ModelEncoder):
     properties = [
         "vin",
         "customer_name",
-        "date",
-        "time",
+        # "date",
+        # "time",
         "reason",
         "is_vip"
     ]
     encoders = {
+        "date": DateEncoder(),
+        "time": DateEncoder(),
         "technician": TechnicianEncoder(),
-        # "automobile": AutomobileVOEncoder()
     }
 
     def get_extra_data(self, o):
@@ -65,12 +67,10 @@ def list_appointments(request):
     else:
         content = json.loads(request.body)
 
-        print(content)
         technician = Technician.objects.get(id=content["technician"])
         content["technician"] = technician
         try:
-            import_vin = AutomobileVO.objects.get(import_vin=content["vin"])
-            content["vin"] = import_vin
+            import_vin = AutomobileVO.objects.get(vo_vin=content["vin"])
             content["is_vip"] = True
         except AutomobileVO.DoesNotExist:
             content["is_vip"] = False

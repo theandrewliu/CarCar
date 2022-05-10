@@ -29,11 +29,11 @@ class Appointment(models.Model):
         on_delete=models.PROTECT
     )
 
-    import_vin = models.ForeignKey(
-        AutomobileVO,
-        related_name="automobiles",
-        on_delete=models.CASCADE
-    )
+    # import_vin = models.ForeignKey(
+    #     AutomobileVO,
+    #     related_name="automobiles",
+    #     on_delete=models.CASCADE
+    # )
 
     def get_api_url(self):
         return reverse("api_appointment", kwargs={"pk": self.pk})
