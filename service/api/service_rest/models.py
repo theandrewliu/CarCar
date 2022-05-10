@@ -16,7 +16,7 @@ class Technician(models.Model):
         return self.name
 
 class Appointment(models.Model):
-    vin = models.CharField(max_length=50, unique=True)
+    vin = models.CharField(max_length=50)
     customer_name = models.CharField(max_length=200)
     starts = models.DateTimeField()
     reason = models.TextField()
