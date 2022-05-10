@@ -27,7 +27,7 @@ class ServiceTechForm extends React.Component {
         };
         const response = await fetch(url, fetchConfig);
         if(response.ok) {
-            const newManufacturer = await response.json();
+            const newTechnician = await response.json();
             this.setState({
                 name: "",
                 employee_number: "",
