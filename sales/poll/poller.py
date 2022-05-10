@@ -18,7 +18,7 @@ def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            response = requests.get("http://inventory-api:8000/x")
+            response = requests.get("http://inventory-api:8100/api/automobile")
             content = json.loads(response.content)
             for automobile in content["automobile"]:
                 AutomobileVO.objects.update_or_create(

@@ -1,5 +1,7 @@
+import json
+from django.http import JsonResponse
 from django.shortcuts import render
-
+from django.views.decorators.http import require_http_methods
 from inventory.api.common.json import ModelEncoder
 from sales.api.sales_rest.models import AutomobileVO, Customer, SalesPerson, SalesRecord
 
@@ -14,7 +16,6 @@ class AutomobileVODetailEncoder(ModelEncoder):
         "import_name",
     ]
 
-
 class SalesPersonDetailEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
@@ -22,7 +23,7 @@ class SalesPersonDetailEncoder(ModelEncoder):
         "employee_id",
     ]
 
-
+#List a sales person's sales history
 class SalesPersonListEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
@@ -37,7 +38,7 @@ class SalesPersonListEncoder(ModelEncoder):
             "salesprice": o.salesrecord.salesprice,
         }
 
-
+#Add a potential customer
 class CustomerDetailEncoder(ModelEncoder):
     model = Customer
     properties = [
@@ -46,7 +47,7 @@ class CustomerDetailEncoder(ModelEncoder):
         "phone",
     ]
 
-
+#Create a sale record
 class SalesRecordDetailEncoder(ModelEncoder):
     model = SalesRecord
     properties = [ 
@@ -61,16 +62,68 @@ class SalesRecordDetailEncoder(ModelEncoder):
         "customer": CustomerDetailEncoder(),
         }
 
-
+#List all sales
 class SalesRecordListEncoder(ModelEncoder):
     model = SalesRecord
     properties = [
         "salesperson",
         "customer",
         "automobile",
+        "salesprice",
     ]
+
     encoders = {
         "automobile": AutomobileVODetailEncoder(),
         "salesperson": SalesPersonDetailEncoder(),
         "customer": CustomerDetailEncoder(),
     }
+
+
+@require_http_methods(['GET', 'DELETE', 'PUT'])
+def api_salesperson(request, pk):
+    if request.method == "GET":
+        try:
+            sales_person = SalesPerson.objects.get(id=pk)
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonDetailEncoder,
+                safe=False
+            )
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "It not here."})
+            response.status_code = 404
+            return response
+
+    elif request.method == "Delete":
+        try:
+            sales_person = SalesPerson.objects.get(id=pk)
+            sales_person.delete()
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonDetailEncoder,
+                safe=False,
+            )
+        except SalesPerson.DoesNotExist:
+            return JsonResponse({"message": "This is not the code you're looking for."})
+    
+    else:
+        try:
+            content = json.loads(request.body)
+            sales_person = SalesPerson.objects.get(id=pk)
+
+            props = ["name", "employee_id"]
+            for prop in props:
+                if prop in content:
+                    setattr(sales_person, prop, content[prop])
+            sales_person.save()
+
+            return JsonResponse(
+                sales_person,
+                encoder=SalesPersonDetailEncoder,
+                safe=False,
+            )
+            
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "You're lost."})
+            response.status_code = 404
+            return response

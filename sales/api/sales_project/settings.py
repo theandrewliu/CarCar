@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
-from inventory.api.inventory_project.settings import CORS_ALLOW_CREDENTIALS, CORS_ALLOWED_ORIGINS, CSRF_TRUSTED_ORIGINS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +33,7 @@ ALLOWED_HOSTS = ["localhost", "inventory-api"]
 
 INSTALLED_APPS = [
     'corsheaders',
-    'sales_rest.apps.SalesRestConfig'
+    'sales_rest.apps.SalesRestConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

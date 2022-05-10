@@ -1,7 +1,6 @@
 from ast import mod
 from django.db import models
 
-from .models import VehicleModel
 
 # Create your models here. Jeremy Mao - Sales
 
@@ -10,7 +9,7 @@ class AutomobileVO(models.Model):
     color = models.CharField(max_length=50)
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
-    import_name = models.CharField()
+    import_name = models.CharField(max_length=200)
 
 
 class SalesPerson(models.Model):
