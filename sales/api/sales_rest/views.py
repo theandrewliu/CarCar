@@ -2,86 +2,18 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from common.json import ModelEncoder
 from .models import AutomobileVO, Customer, SalesPerson, SalesRecord
-
+from .encoders import ( 
+    AutomobileVO, 
+    SalesPersonDetailEncoder, 
+    SalesPersonListEncoder, 
+    SalesRecordDetailEncoder, 
+    SalesRecordListEncoder, 
+    CustomerDetailEncoder, 
+    CustomerListEncoder
+)
 # Create your views here.
 
-class AutomobileVODetailEncoder(ModelEncoder):
-    model = AutomobileVO
-    properties = [
-        "vin",
-        "color",
-        "year",
-        "import_name",
-        "import_href",
-    ]
-
-class SalesPersonDetailEncoder(ModelEncoder):
-    model = SalesPerson
-    properties = [
-        "name",
-        "employee_id",
-    ]
-
-class SalesPersonListEncoder(ModelEncoder):
-    model = SalesPerson
-    properties = [
-        "name",
-        "employee_id",
-    ]
-
-    def get_extra_data(self, o):
-        return {
-            "customer": o.customer.name,
-            "vin": o.automobiles.vin,
-            "salesprice": o.salesrecord.salesprice,
-        }
-
-class CustomerListEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "name",
-        "address",
-        "phone",
-    ]
-
-class CustomerDetailEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        "name",
-        "address",
-        "phone",
-    ]
-
-class SalesRecordDetailEncoder(ModelEncoder):
-    model = SalesRecord
-    properties = [ 
-        "automobile",
-        "salesperson",
-        "customer",
-        "salesprice",
-    ]
-    encoders = {
-        "automobile": AutomobileVODetailEncoder(),
-        "salesperson": SalesPersonDetailEncoder(),
-        "customer": CustomerDetailEncoder(),
-        }
-
-class SalesRecordListEncoder(ModelEncoder):
-    model = SalesRecord
-    properties = [
-        "salesperson",
-        "customer",
-        "automobiles",
-        "salesprice",
-    ]
-
-    encoders = {
-        "automobile": AutomobileVODetailEncoder(),
-        "salesperson": SalesPersonDetailEncoder(),
-        "customer": CustomerDetailEncoder(),
-    }
 
 
 @require_http_methods(['GET', 'DELETE', 'PUT'])
@@ -143,9 +75,8 @@ def list_salesperson(request):
             encoder = SalesPersonListEncoder
         )
     else:
-        content = json.loads(request.body)
-
         try:
+            content = json.loads(request.body)
             salesPerson = SalesPerson.objects.get(id=content["salesPerson"])
             content["salesPerson"] = salesPerson
 
@@ -175,7 +106,7 @@ def api_customer(request, pk):
             )
         
         except Customer.DoesNotExist:
-            response = JsonResponse({"message": "Who's dis?"})
+            response = JsonResponse({"message": "Who's is this?"})
             response.status_code = 404
             return response
         
@@ -206,13 +137,41 @@ def api_customer(request, pk):
             return JsonResponse(
                 customers, 
                 encoder=CustomerDetailEncoder,
-                safe = False
+                safe = False,
             )
 
         except Customer.DoesNotExist:
             response = JsonResponse({"message": "Look over there!"})
             response.status_code = 404
             return response
+
+
+@require_http_methods(["GET", "POST"])
+def list_customer(request):
+    if request.method == "GET":
+        customer = Customer.objects.all()
+        return JsonResponse(
+            {"customer": customer},
+            encoder = CustomerListEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.create(**content)
+
+            return JsonResponse(
+            customer,
+            endcoder=CustomerListEncoder,
+            safe=False,
+        )
+        except:
+            response = JsonResponse(
+                {"message": "What am I"},
+            )
+            response.status_code = 400
+            return response
+
+
 
 
 @require_http_methods({"GET", "POST"})
