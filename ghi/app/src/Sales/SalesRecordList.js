@@ -8,7 +8,7 @@ function SalesRecordList(props) {
         <tr>
           <th>Sales Partner</th>
           <th>Employee I.D.</th>
-          <th>Customer Name</th>
+          <th>Customer</th>
           <th>VIN</th>
           <th>Sales Price</th>
         </tr>

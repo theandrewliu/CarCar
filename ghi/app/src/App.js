@@ -3,8 +3,6 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
-import ServiceTechList from './Service/ServiceTechList';
-import ServiceTechForm from './Service/ServiceTechForm';
 import ServiceAppointmentList from './Service/ServiceAppointmentList'
 import ServiceAppointmentForm from './Service/ServiceAppointmentForm'
 
