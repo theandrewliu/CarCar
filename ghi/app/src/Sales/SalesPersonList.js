@@ -1,7 +1,5 @@
 
 
-
-
 function SalesPersonList(props) {
     return(
     <table className="table table-striped">

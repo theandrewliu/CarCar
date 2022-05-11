@@ -15,6 +15,12 @@ class CustomerForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    async handleSubmit(event){
+        event.preventDefault();
+        const data = {...this.state};
+        
+    }
+
     handleNameChange(event) {
         const value = event.target.value;
         this.setState({ name: value });
