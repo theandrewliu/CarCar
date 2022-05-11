@@ -5,7 +5,6 @@ import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
 import ServiceAppointmentList from './Service/ServiceAppointmentList';
 import ServiceAppointmentForm from './Service/ServiceAppointmentForm';
-import CustomerForm from './Sales/CustomerForm';
 import SalesPersonList from './Sales/SalesPersonList';
 import SalesPersonForm from './Sales/SalesPersonForm';
 import SalesRecordList from './Sales/SalesRecordList';
@@ -28,10 +27,6 @@ function App(props) {
           <Route path="service">
             <Route index element={<ServiceAppointmentList appointments={props.appointments} />} />
             <Route path="new" element={<ServiceAppointmentForm />}/>
-          </Route>
-          <Route path="customer">
-            <Route index element={<CustomerDetail customer={props.customer} />} />
-            <Route path="new" element={<CustomerForm/>}/>
           </Route>
           <Route path="salesperson">
           <Route index element={<SalesPersonList salesperson={props.salesperson} />}/>

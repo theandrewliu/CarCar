@@ -2,7 +2,7 @@
 
 
 
-function SalesRecordList(props) {
+function SalesPersonList(props) {
     return(
     <table className="table table-striped">
       <thead>
@@ -28,4 +28,4 @@ function SalesRecordList(props) {
   );
 }
 
-export default SalesRecordList
+export default SalesPersonList

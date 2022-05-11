@@ -16,7 +16,9 @@ class AutomobileVO(models.Model):
 class SalesPerson(models.Model):
     name = models.CharField(max_length=200)
     employee_id = models.PositiveSmallIntegerField()
-    
+
+    def get_api_url(self):
+        return reverse("api_salesperson", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name
@@ -26,6 +28,9 @@ class Customer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     phone = models.CharField(max_length=200)
+
+    def get_api_url(self):
+        return reverse("api_customer", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.name

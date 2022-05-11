@@ -40,6 +40,7 @@ async function loadInventory() {
   if(customerResponse.ok) {
     customerData = await customerResponse.json();
     console.log("customer: ", customerData);
+    
   } else {
     console.log("customer: ", customerResponse);
   }
@@ -47,8 +48,10 @@ async function loadInventory() {
   if (salespersonResponse.ok && salesrecordResponse.ok){
     salespersonData = await salespersonResponse.json();
     salesrecordData = await salesrecordResponse.json();
+
     console.log("salesperson: ", salespersonResponse);
     console.log("salesrecord: ", salesrecordResponse);
+
   } else {
     console.error(salespersonResponse || salesrecordResponse);
   }
