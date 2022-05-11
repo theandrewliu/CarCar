@@ -55,11 +55,11 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3000", "http://localhost:8080",
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:3000","http://localhost:8080",
 ]
 CORS_ALLOW_CREDENTIALS = True
 

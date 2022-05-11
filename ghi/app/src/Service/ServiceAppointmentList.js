@@ -3,22 +3,21 @@ import { NavLink } from "react-router-dom"
 
 function AppointmentList(props) {
     console.log("me", props)
+
     const deleteItem = async (id) => {
       fetch(`http://localhost:8080/api/appointments/${id}`,{
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'
-      }
+        headers: {'Content-Type': 'application/json'}
       }).then(() => {
         window.location.reload();
       })
     }
 
     const finishItem = async (id) => {
-        fetch(`http://localhost:8080/api/appointments/${id}`,{
+        await fetch(`http://localhost:8080/api/appointments/${id}/`,{
             method: 'PUT',
-            headers: {'Content-Type': 'application/json',
-            body: JSON.stringify({ is_finished: true})
-        }
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({is_finished: true}),
         }).then(() =>{
             window.location.reload();
         })
@@ -64,7 +63,7 @@ function AppointmentList(props) {
                         <td>{ appointment.technician }</td>
                         <td>{ appointment.reason }</td>
                         <td><i className={vip_classname}></i></td>
-                        <td><button className="btn btn-danger" onClick={() => deleteItem(appointment.id)}>Cancel</button><button className="btn btn-success" onClick={() => deleteItem(appointment.id)}>Finished</button></td>
+                        <td><button className="btn btn-danger" onClick={() => deleteItem(appointment.id)}>Cancel</button><button className="btn btn-success" onClick={() => finishItem(appointment.id)}>Finished</button></td>
                         
                     </tr>
                     );

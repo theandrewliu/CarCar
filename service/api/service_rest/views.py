@@ -81,18 +81,31 @@ def list_appointments(request):
             safe=False
         )
     
-@require_http_methods(["DELETE"])
+@require_http_methods(["DELETE", "PUT"])
 def delete_appointments(request, pk):
-    try:
+    if request.method == "DELETE":
+        try:
+            appointment = Appointment.objects.get(id=pk)
+            appointment.delete()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentDetailEncoder,
+                safe=False,
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse({"message":"Does not exist"})
+    else:
+        content = json.loads(request.body)
         appointment = Appointment.objects.get(id=pk)
-        appointment.delete()
-        return JsonResponse(
-            appointment,
-            encoder=AppointmentDetailEncoder,
-            safe=False,
-        )
-    except Appointment.DoesNotExist:
-        return JsonResponse({"message":"Does not exist"})
+
+        Appointment.objects.filter(id=pk).update(**content)
+        appointment = Appointment.objects.get(id=pk)
+        
+    return JsonResponse(
+        appointment,
+        encoder=AppointmentDetailEncoder,
+        safe=False,
+    )
 
 @require_http_methods(["DELETE"])
 def delete_technician(request, pk):
