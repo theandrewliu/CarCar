@@ -27,6 +27,7 @@ function AppointmentList(props) {
         <div className="container">
             <h2 className="display-5 fw-bold">Service Appointments</h2>
             <button type="button" className="btn btn-outline-primary"><NavLink className="nav-link" aria-current="page" to="/service/new">Create an Appointment</NavLink></button>
+            <button type="button" className="btn btn-outline-info"><NavLink className="nav-link" aria-current="page" to="/service/history">Service History</NavLink></button>
             <table className="table table-striped">
                 <thead>
                 <tr>
