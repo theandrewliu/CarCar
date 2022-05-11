@@ -8,9 +8,13 @@ async function loadInventory() {
   // add ur data below
   let serviceData, techData, manufactureData;
   // const salesResponse = await fetch('');
-  const serviceResponse = await fetch('http://localhost:8080/api/appointments/')
-  const techResponse = await fetch('http://localhost:8080/api/technicians/')
-  const manufactureResponse = await fetch('http://localhost:8100/api/manufacturers/')
+  const serviceResponse = await fetch('http://localhost:8080/api/appointments/');
+  const techResponse = await fetch('http://localhost:8080/api/technicians/');
+  const manufactureResponse = await fetch('http://localhost:8100/api/manufacturers/');
+
+  const customerResponse = await fetch('http://localhost:8090/api/customer/');
+  const salespersonResponse = await fetch('http://localhost:8090/api/salesperson/');
+  const salesrecordResponse = await fetch('http://localhost:8090/api/salesrecord/');
 
   if(manufactureResponse.ok) {
     manufactureData = await manufactureResponse.json();
@@ -27,8 +31,23 @@ async function loadInventory() {
   } else {
     console.error(serviceResponse || techResponse);
   }
-  // put sales if statement below
 
+  // put sales if statement below
+  if(customerResponse.ok) {
+    customerData = await customerResponse.json();
+    console.log("customer: ", customerData);
+  } else {
+    console.log("customer: ", customerResponse);
+  }
+
+  if (salespersonResponse.ok && salesrecordResponse.ok){
+    salespersonData = await salespersonResponse.json();
+    salesrecordData = await salesrecordResponse.json();
+    console.log("salesperson: ", salespersonResponse);
+    console.log("salesrecord: ", salesrecordResponse);
+  } else {
+    console.error(salespersonResponse || salesrecordResponse);
+  }
 
   root.render(
     <React.StrictMode>

@@ -23,12 +23,17 @@ function App(props) {
             <Route index element={<ServiceAppointmentList appointments={props.appointments} />} />
             <Route path="new" element={<ServiceAppointmentForm />}/>
           </Route>
-          <Route path="technicians">
-            <Route index element={<ServiceTechList technicians={props.technicians} />} />
-            <Route path="new" element={<ServiceTechForm/>}/>
+          <Route path="customer">
+            <Route index element={<CustomerDetail customer={props.customer} />} />
+            <Route path="new" element={<CustomerForm/>}/>
           </Route>
-          <Route path="sales">
-
+          <Route path="salesperson">
+          <Route index element={<SalesPersonList salesperson={props.salesperson} />}/>
+            <Route path="new" element={<SalesPersonForm />}/>
+          </Route>
+          <Route path="salesrecord">
+            <Route index element={<SalesRecordList salesrecord={props.salesrecord} />} />
+            <Route path="new" element={<SalesRecordForm />}/>
           </Route>
         </Routes>
       </div>
