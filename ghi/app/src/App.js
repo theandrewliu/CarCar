@@ -3,8 +3,16 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
-import ServiceAppointmentList from './Service/ServiceAppointmentList'
-import ServiceAppointmentForm from './Service/ServiceAppointmentForm'
+import ServiceAppointmentList from './Service/ServiceAppointmentList';
+import ServiceAppointmentForm from './Service/ServiceAppointmentForm';
+import CustomerForm from './Sales/CustomerForm';
+import SalesPersonList from './Sales/SalesPersonList';
+import SalesPersonForm from './Sales/SalesPersonForm';
+import SalesRecordList from './Sales/SalesRecordList';
+import SalesRecordForm from './Sales/SalesRecordForm';
+
+
+
 
 function App(props) {
   return (

@@ -9,6 +9,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 async function loadInventory() {
   // add ur data below
   let serviceData, techData, manufactureData;
+  let customerData, salespersonData, salesrecordData;
+
   // const salesResponse = await fetch('');
   const serviceResponse = await fetch('http://localhost:8080/api/appointments/');
   const techResponse = await fetch('http://localhost:8080/api/technicians/');
