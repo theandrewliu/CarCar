@@ -1,6 +1,8 @@
 from django.urls import reverse
 from django.db import models
 
+from inventory.api.inventory_rest.models import Automobile
+
 
 # Create your models here. Jeremy Mao - Sales
 
@@ -10,18 +12,6 @@ class AutomobileVO(models.Model):
     year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
     import_name = models.CharField(max_length=200)
-    import_href = models.CharField(max_length=200, unique=True)
-
-
-class SalesPerson(models.Model):
-    name = models.CharField(max_length=200)
-    employee_id = models.PositiveSmallIntegerField()
-
-    def get_api_url(self):
-        return reverse("api_salesperson", kwargs={"pk": self.id})
-
-    def __str__(self):
-        return self.name
 
 
 class Customer(models.Model):
@@ -31,6 +21,17 @@ class Customer(models.Model):
 
     def get_api_url(self):
         return reverse("api_customer", kwargs={"pk": self.id})
+
+    def __str__(self):
+        return self.name
+
+
+class SalesPerson(models.Model):
+    name = models.CharField(max_length=200)
+    employee_id = models.PositiveSmallIntegerField()
+
+    def get_api_url(self):
+        return reverse("api_salesperson", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.name
@@ -47,12 +48,12 @@ class SalesRecord(models.Model):
     salesperson = models.ForeignKey(
         SalesPerson,
         related_name="salesperson",
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
     )
     customer = models.ForeignKey(
         Customer,
         related_name="customer",
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
     )
 
     def get_api_url(self):
