@@ -21,6 +21,7 @@ class Appointment(models.Model):
     starts = models.DateTimeField()
     reason = models.TextField()
     is_vip = models.BooleanField(default=False)
+    is_finished = models.BooleanField(default=False)
 
     technician = models.ForeignKey(
         Technician,

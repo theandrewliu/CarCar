@@ -129,7 +129,7 @@ class ServiceAppointmentForm extends React.Component {
                             })}
                             </select>
                         </div>
-                        <button className="btn btn-primary">Create Appointment</button>
+                        <button className="btn btn-primary">Schedule Service</button>
                         </form>
                     </div>
                 </div>
