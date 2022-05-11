@@ -38,6 +38,14 @@ class SalesPersonListEncoder(ModelEncoder):
             "salesprice": o.salesrecord.salesprice,
         }
 
+class CustomerListEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        "name",
+        "address",
+        "phone",
+    ]
+
 class CustomerDetailEncoder(ModelEncoder):
     model = Customer
     properties = [

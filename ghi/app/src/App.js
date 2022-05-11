@@ -3,11 +3,15 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
-import ServiceTechList from './Service/ServiceTechList';
-import ServiceTechForm from './Service/ServiceTechForm';
-import ServiceAppointmentList from './Service/ServiceAppointmentList'
-import ServiceAppointmentForm from './Service/ServiceAppointmentForm'
-import ServiceHistoryList from './Service/ServiceHistoryList'
+import ServiceAppointmentList from './Service/ServiceAppointmentList';
+import ServiceAppointmentForm from './Service/ServiceAppointmentForm';
+import SalesPersonList from './Sales/SalesPersonList';
+import SalesPersonForm from './Sales/SalesPersonForm';
+import SalesRecordList from './Sales/SalesRecordList';
+import SalesRecordForm from './Sales/SalesRecordForm';
+
+
+
 
 function App(props) {
   return (
@@ -25,12 +29,13 @@ function App(props) {
             <Route path="new" element={<ServiceAppointmentForm />}/>
             <Route path="history" element={<ServiceHistoryList />}/>
           </Route>
-          <Route path="technicians">
-            <Route index element={<ServiceTechList technicians={props.technicians} />} />
-            <Route path="new" element={<ServiceTechForm/>}/>
+          <Route path="salesperson">
+          <Route index element={<SalesPersonList salesperson={props.salesperson} />}/>
+            <Route path="new" element={<SalesPersonForm />}/>
           </Route>
-          <Route path="sales">
-
+          <Route path="salesrecord">
+            <Route index element={<SalesRecordList salesrecord={props.salesrecord} />} />
+            <Route path="new" element={<SalesRecordForm />}/>
           </Route>
         </Routes>
       </div>
