@@ -3,6 +3,9 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ManufacturerList from './Inventory/ManufacturerList';
 import ManufacturerForm from './Inventory/ManufacturerForm';
+import VehicleModelList from './Inventory/VehicleModelList';
+import VehicleModelForm from './Inventory/VechicleModelForm';
+import AutomobileList from './Inventory/AutomobileList';
 import ServiceAppointmentList from './Service/ServiceAppointmentList';
 import ServiceAppointmentForm from './Service/ServiceAppointmentForm';
 import ServiceHistoryList from './Service/ServiceHistoryList';
@@ -26,6 +29,13 @@ function App(props) {
           <Route path="manufacturers">
             <Route index element={<ManufacturerList manufacturers={props.manufacturers} />}/>
             <Route path="new" element={<ManufacturerForm />}/>
+          </Route>
+          <Route path="models">
+            <Route index element={<VehicleModelList models={props.models}/>}/>
+            <Route path="new" element={<VehicleModelForm />}/>
+          </Route>
+          <Route path="autos">
+            <Route index element={<AutomobileList autos={props.autos}/>}/>
           </Route>
           <Route path="service">
             <Route index element={<ServiceAppointmentList appointments={props.appointments} />} />
