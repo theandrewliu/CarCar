@@ -73,7 +73,7 @@ class SalesRecordListEncoder(ModelEncoder):
     properties = [
         "salesperson",
         "customer",
-        "automobile",
+        "automobiles",
         "salesprice",
     ]
 

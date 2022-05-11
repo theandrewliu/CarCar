@@ -75,7 +75,11 @@ async function loadInventory() {
 
   root.render(
     <React.StrictMode>
-      <App appointments={serviceData.appointments} technicians={techData.technicians} manufacturers={manufactureData.manufacturers} models={vehicleModelData.models} autos={automobileData.autos}/>
+      <App 
+      appointments={serviceData.appointments} technicians={techData.technicians} 
+      manufacturers={manufactureData.manufacturers} models={vehicleModelData.models} autos={automobileData.autos}
+      customers={customerData.customers} salespersons={salespersonData.salespersons} salesrecords={salesrecordData.salesrecords}
+      />
     </React.StrictMode>
   );
 }

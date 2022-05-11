@@ -18,7 +18,7 @@ class SalesPerson(models.Model):
     employee_id = models.PositiveSmallIntegerField()
 
     def get_api_url(self):
-        return reverse("api_salesperson", kwargs={"pk": self.pk})
+        return reverse("api_salesperson", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.name
@@ -30,7 +30,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=200)
 
     def get_api_url(self):
-        return reverse("api_customer", kwargs={"pk": self.pk})
+        return reverse("api_customer", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.name
@@ -56,7 +56,7 @@ class SalesRecord(models.Model):
     )
 
     def get_api_url(self):
-        return reverse("api_automobiles", kwargs={"pk": self.pk})
+        return reverse("api_salesrecord", kwargs={"pk": self.id})
 
     def __str__(self):
         return self.salesperson

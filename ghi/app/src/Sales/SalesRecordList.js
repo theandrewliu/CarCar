@@ -14,12 +14,14 @@ function SalesRecordList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.hats.map(hat => {
+        {props.salesrecords.map(salesrecord => {
           return (
-            <tr key={hat.href}>
-              <td>{ hat.name }</td>
-              <td>{ hat.style_name }</td>
-              <td>{ hat.location }</td>
+            <tr key={salesrecord.id}>
+              <td>{ salesrecord.salesperson}</td>
+              <td>{ salesrecord.salesperson}</td>
+              <td>{ salesrecord.customer}</td>
+              <td>{ salesrecord.automobiles}</td>
+              <td>{ salesrecord.salesprice}</td>
             </tr>
           );
         })}
