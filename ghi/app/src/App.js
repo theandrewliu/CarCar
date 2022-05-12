@@ -16,7 +16,7 @@ import SalesPersonList from './Sales/SalesPersonList';
 import SalesPersonForm from './Sales/SalesPersonForm';
 import SalesRecordList from './Sales/SalesRecordList';
 import SalesRecordForm from './Sales/SalesRecordForm';
-import CustomerForm from './Sales/CustomerForm';
+// import CustomerForm from './Sales/CustomerForm';
 // import CustomerList from './Sales/CustomerList';
 
 

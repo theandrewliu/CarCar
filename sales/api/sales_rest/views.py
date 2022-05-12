@@ -63,7 +63,7 @@ def api_salesperson(request, pk):
             return response
 
 
-@require_http_methods({"GET", "POST"})
+@require_http_methods(["GET", "POST"])
 def list_salesperson(request):
     if request.method == "GET":
         salesperson = SalesPerson.objects.all()
@@ -81,10 +81,8 @@ def list_salesperson(request):
                 safe=False,
             )
 
-        except:
-            response = JsonResponse(
-                {"message": "Invalid Address"},
-            )
+        except SalesPerson.DoesNotExist:
+            response = JsonResponse({"message": "Invalid Address"})
             response.status_code = 400
             return response
 
@@ -185,9 +183,8 @@ def list_salesrecord(request, automobile_vo_id=None):
         try:
             content = json.loads(request.body)
 
-            automobile_name = content['automobile']
-            automobile = AutomobileVO.objects.get(import_name=automobile_name)
-            content["automobile"] = automobile
+            vin = AutomobileVO.objects.get(vin="vin")
+            content["vin"] = vin
 
             salesperson = SalesPerson.objects.get(id=content["salesperson"])
             content["salesperson"] = salesperson

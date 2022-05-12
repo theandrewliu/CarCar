@@ -20,9 +20,9 @@ def poll():
         try:
             response = requests.get("http://inventory-api:8000/api/automobiles/")
             content = json.loads(response.content)
-            for automobile in content["automobile"]:
+            for automobile in content["automobiles"]:
                 AutomobileVO.objects.update_or_create(
-                    import_name = automobile["model.name"],
+                    vin = automobile["vin"],
                     defaults = {
                         "color": automobile["color"],
                         "year": automobile["year"],
