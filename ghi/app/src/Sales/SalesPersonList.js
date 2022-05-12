@@ -12,12 +12,12 @@ function SalesPersonList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.hats.map(hat => {
+        {props.salesperson.map(salesperson => {
           return (
-            <tr key={hat.href}>
-              <td>{ hat.name }</td>
-              <td>{ hat.style_name }</td>
-              <td>{ hat.location }</td>
+            <tr key={salesperson.id}>
+              <td>{ salesperson.name }</td>
+              {/* <td>{ salesperson.style_name }</td>
+              <td>{ salesperson.location }</td> */}
             </tr>
           );
         })}

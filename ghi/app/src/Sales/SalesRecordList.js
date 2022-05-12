@@ -18,7 +18,6 @@ function SalesRecordList(props) {
           return (
             <tr key={salesrecord.id}>
               <td>{ salesrecord.salesperson}</td>
-              <td>{ salesrecord.salesperson}</td>
               <td>{ salesrecord.customer}</td>
               <td>{ salesrecord.automobiles}</td>
               <td>{ salesrecord.salesprice}</td>

@@ -5,10 +5,7 @@ from .models import AutomobileVO, SalesPerson, SalesRecord, Customer
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "vin",
-        "color",
-        "year",
-        "import_name",
+        "vin"
     ]
 
 
@@ -29,12 +26,7 @@ class SalesPersonEncoder(ModelEncoder):
         "employee_id",
         "id",
     ]
-    def get_extra_data(self, o):
-        return {
-            "customer": o.customer.name,
-            "automobiles": o.automobiles.vin,
-            "salesrecord": o.salesrecord.salesprice,
-            }
+
 
 
 class SalesRecordEncoder(ModelEncoder):
@@ -48,7 +40,7 @@ class SalesRecordEncoder(ModelEncoder):
     ]
 
     encoders = {
-        "automobile": AutomobileVOEncoder(),
+        "automobiles": AutomobileVOEncoder(),
         "salesperson": SalesPersonEncoder(),
         "customer": CustomerEncoder(),
     }
