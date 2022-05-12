@@ -1,7 +1,7 @@
 from django.urls import reverse
 from django.db import models
 
-from inventory.api.inventory_rest.models import Automobile
+#from inventory.api.inventory_rest.models import Automobile
 
 
 # Create your models here. Jeremy Mao - Sales
