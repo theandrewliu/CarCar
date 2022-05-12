@@ -5,9 +5,7 @@ from .models import AutomobileVO, SalesPerson, SalesRecord, Customer
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "vin",
-        "color",
-        "year",
+        "vin"
     ]
 
 

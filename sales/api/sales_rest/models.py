@@ -7,8 +7,6 @@ from django.db import models
 
 
 class AutomobileVO(models.Model):
-    color = models.CharField(max_length=50)
-    year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
 
 

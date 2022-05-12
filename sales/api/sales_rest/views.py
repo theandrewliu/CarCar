@@ -2,6 +2,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+
 from .models import AutomobileVO, Customer, SalesPerson, SalesRecord
 from .encoders import ( 
     AutomobileVO, 
@@ -183,8 +184,8 @@ def list_salesrecord(request, automobile_vo_id=None):
         try:
             content = json.loads(request.body)
 
-            vin = AutomobileVO.objects.get(vin="vin")
-            content["vin"] = vin
+            automobiles = AutomobileVO.objects.get(vin=content["automobiles"])
+            content["automobiles"] = automobiles
 
             salesperson = SalesPerson.objects.get(id=content["salesperson"])
             content["salesperson"] = salesperson
@@ -242,7 +243,7 @@ def api_salesrecord(request, pk):
             salesrecord = SalesRecord.objects.get(id=pk)
 
             props = [        
-                "automobile",
+                "automobiles",
                 "salesperson",
                 "customer",
                 "salesprice",
