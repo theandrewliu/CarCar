@@ -28,16 +28,15 @@ class CustomerForm extends React.Component{
                 'Content-Type': 'application/json',
             },
         };
-    const response = await fetch(customer_formUrl, fetchConfig);
-    if(response.ok){
-        const new_customerform = await response.json();
-        console.log(new_customerform)
-        const cleared = {
-            name: '',
-            address: '',
-            phone: '',
-        };
-        this.setState(cleared)
+        const response = await fetch(customer_formUrl, fetchConfig);
+        if(response.ok){
+            const new_customerform = await response.json();
+            console.log(new_customerform)
+            this.setState({
+                name: '',
+                address: '',
+                phone: '',
+            });
     }
 }
 

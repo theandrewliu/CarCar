@@ -12,12 +12,12 @@ function CustomerList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.customer.map(customer => {
+        {props.customer.map(customers => {
           return (
-            <tr key={customer.id}>
-              <td>{ customer.name }</td>
-              <td>{ customer.address }</td>
-              <td>{ customer.phone }</td>
+            <tr key={customers.id}>
+              <td>{ customers.name }</td>
+              <td>{ customers.address }</td>
+              <td>{ customers.phone }</td>
             </tr>
           );
         })}

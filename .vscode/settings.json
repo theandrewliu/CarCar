@@ -3,6 +3,7 @@
         "./sales/api"
     ],
     "cSpell.words": [
+        "customerform",
         "salesprice",
         "salesrecord",
         "salesrecords"

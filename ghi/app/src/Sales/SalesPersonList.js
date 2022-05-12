@@ -12,10 +12,10 @@ function SalesPersonList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.salesperson.map(salesperson => {
+        {props.salesperson.map(salespersons => {
           return (
-            <tr key={salesperson.id}>
-              <td>{ salesperson.name }</td>
+            <tr key={salespersons.id}>
+              <td>{ salespersons.name }</td>
               {/* <td>{ salesperson.style_name }</td>
               <td>{ salesperson.location }</td> */}
             </tr>

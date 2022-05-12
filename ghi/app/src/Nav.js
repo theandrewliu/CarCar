@@ -29,13 +29,13 @@ function Nav() {
               <NavLink className="nav-link" aria-current="page" to="/service">Service Appointments</NavLink>
             </li>
             <li className="nav_item">
-              <NavLink className="nav-link" aria-current="page" to="/customer">Customer Sign Up</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/customer/new">Customer Sign Up</NavLink>
             </li>
             <li className="nav_item">
-              <NavLink className="nav-link" aria-current="page" to="/salesperson">Sales Associate Set Up</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/salesperson/new">Join Our Team</NavLink>
             </li>
             <li className="nav_item">
-              <NavLink className="nav-link" aria-current="page" to="/salesrecord">BUY NOW!</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/salesrecord/new">BUY NOW!</NavLink>
             </li>
           </ul>
         </div>

@@ -1,8 +1,12 @@
+import { NavLink } from 'react-router-dom'
 
 
 
 function SalesRecordList(props) {
     return(
+    <div className="container">
+    <h2 className="display-5 fw-bold">Sales Records</h2>
+    <NavLink className="nav-link" aria-current="page" to="/salesrecord/new">Add a Manufacturer</NavLink>
     <table className="table table-striped">
       <thead>
         <tr>
@@ -14,19 +18,20 @@ function SalesRecordList(props) {
         </tr>
       </thead>
       <tbody>
-        {props.salesrecords.map(salesrecord => {
+        {props.salesrecord.map(salesrecords => {
+          console.log("ANIME", salesrecords)
           return (
-            <tr key={salesrecord.id}>
-              <td>{ salesrecord.salesperson}</td>
-              <td>{ salesrecord.customer}</td>
-              <td>{ salesrecord.automobiles}</td>
-              <td>{ salesrecord.salesprice}</td>
+            <tr key={salesrecords.id}>
+              <td>{ salesrecords.salesperson}</td>
+              <td>{ salesrecords.customer}</td>
+              <td>{ salesrecords.automobiles}</td>
+              <td>{ salesrecords.salesprice}</td>
             </tr>
-          );
+          )
         })}
       </tbody>
     </table>
+  </div>
   );
 }
-
 export default SalesRecordList

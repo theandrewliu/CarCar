@@ -201,7 +201,7 @@ def list_salesrecord(request, automobile_vo_id=None):
         )
         except AutomobileVO.DoesNotExist:
             response = JsonResponse(
-                {"message": "Show me some id."},
+                {"message": "Show me your moves."},
                 status=400,
             )
             response.status_code = 400

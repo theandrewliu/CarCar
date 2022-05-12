@@ -14,7 +14,7 @@ function MainPage() {
           management!
         </p>
         <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <Link to="/hats/new" className="btn btn-primary btn-lg px-4 gap-3">Purchase your NEW Car!</Link>
+            <Link to="/salesrecord/new" className="btn btn-primary btn-lg px-4 gap-3">Purchase your NEW Car!</Link>
             </div>
       </div>
     </div>
