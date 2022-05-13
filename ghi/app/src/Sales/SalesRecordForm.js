@@ -9,8 +9,8 @@ class SalesRecordForm extends React.Component{
             customer: '',
             customers: [],
             salesprice: '',
-            automobiles: '',
-            automobile: [],
+            autos: '',
+            auto: [],
         };
 
         this.handleSalesPersonChange = this.handleSalesPersonChange.bind(this);
@@ -29,47 +29,37 @@ class SalesRecordForm extends React.Component{
         const responses = await fetch(customerUrl)
         const responded = await fetch(automobile_Url)
 
-        if(response.ok){
+        if(response.ok && responses.ok && responded.ok){
             const data = await response.json();
+            const data_customer = await responses.json();
+            const data_automobile = await responded.json();
 
-            this.setState({
-                salespersons: data.salesperson
-            })
+            this.setState({salespersons: data.salesperson})
+            this.setState({customers: data_customer.customer})
+            this.setState({auto: data_automobile.autos})
         }
+    }             
 
-        if(responses.ok){
-            const data = await responses.json();
-
-            this.setState({
-                customers: data.customer
-            })
-            console.log("ANIME", data.customer)
-        }
-
-    //     if(responded.ok){
-    //         const data = await responded.json();
-
-    //         this.setState({
-    //             automobile: data.automobiles
-    //         })
-    //     }
-    }
 
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
         delete data.salespersons
         delete data.salesperson
-        // delete data.customers
-        // delete data.automobiles
-        // delete data.automobile
-        // delete data.customer
+        const data_customer = {...this.state};
+        delete data_customer.customers
+        delete data_customer.customer
+        const data_automobile = {...this.state};
+        delete data_automobile.autos
+        delete data_automobile.auto
 
 
         const sales_recordUrl = 'http://localhost:8090/api/salesrecord/';
         const fetchConfig = {
             method: "POST",
-            body: JSON.stringify(data),
+            body: JSON.stringify(data), 
+            body: JSON.stringify(data_customer), 
+            body: JSON.stringify(data_automobile),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -82,7 +72,7 @@ class SalesRecordForm extends React.Component{
                 salesperson: '',
                 customer: '',
                 salesprice: '',
-                automobiles: '',
+                autos: '',
             });
         };
     }
@@ -102,7 +92,7 @@ class SalesRecordForm extends React.Component{
     }
     handleSalesPriceChange(event) {
         const value = event.target.value;
-        this.setState({ automobiles: value });
+        this.setState({ autos: value });
     }
 
 
@@ -128,7 +118,7 @@ class SalesRecordForm extends React.Component{
                             <option value="">Customer</option>
                             {this.state.customers.map(customer => {
                                 return (
-                                <option key={customer.id} value={customer.id}>{customer.names}</option>
+                                <option key={customer.id} value={customer.id}>{customer.name}</option>
                                 )
                             })}
                             </select>
@@ -136,7 +126,7 @@ class SalesRecordForm extends React.Component{
                         <div className="mb-3">
                             <select onChange={this.handleAutomobilesChange} value={this.state.automobiles} required name="automobiles" id="vin" className="form-select">
                             <option value="">Automobiles</option>
-                            {this.state.automobile.map(automobiles => {
+                            {this.state.auto.map(automobiles => {
                                 return (
                                 <option key={automobiles.vin} value={automobiles.vin}>{automobiles.vin}</option>
                                 )

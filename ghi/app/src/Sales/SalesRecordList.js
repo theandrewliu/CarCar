@@ -1,13 +1,8 @@
-import { NavLink } from 'react-router-dom'
-
 
 
 function SalesRecordList(props) {
     return(
-    <div className="container">
-    <h2 className="display-5 fw-bold">Sales Records</h2>
-    <NavLink className="nav-link" aria-current="page" to="/salesrecord/new">Add a Manufacturer</NavLink>
-    <table className="table table-striped">
+      <table className="table table-striped">
       <thead>
         <tr>
           <th>Sales Partner</th>
@@ -26,11 +21,10 @@ function SalesRecordList(props) {
               <td>{ salesrecords.automobiles}</td>
               <td>{ salesrecords.salesprice}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  </div>
   );
 }
 export default SalesRecordList

@@ -59,10 +59,12 @@ function App(props) {
           <Route path="salesperson">
             <Route index element={<SalesPersonList salesperson={props.salesperson} />}/>
             <Route path="new" element={<SalesPersonForm />}/>
+            <Route path="history" element={<SalesPersonList />}/>
           </Route>
           <Route path="salesrecord">
             <Route index element={<SalesRecordList salesrecord={props.salesrecord} />} />
             <Route path="new" element={<SalesRecordForm />}/>
+            <Route path="history" element={<SalesRecordList />}/>
           </Route>
         </Routes>
       </div>
