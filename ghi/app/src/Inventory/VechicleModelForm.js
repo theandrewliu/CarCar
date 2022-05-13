@@ -50,7 +50,7 @@ class VehicleModelForm extends React.Component {
                 name: "",
                 manufacturer: "",
                 picture:"",
-            });
+            })
         }
     }
 

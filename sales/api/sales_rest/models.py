@@ -42,7 +42,6 @@ class SalesRecord(models.Model):
         related_name="auto",
         on_delete=models.CASCADE,
         null=True,
-
     )
     salesperson = models.ForeignKey(
         SalesPerson,
@@ -55,9 +54,7 @@ class SalesRecord(models.Model):
         related_name="customers",
         on_delete=models.PROTECT,
         null=True,
-
     )
-
     def get_api_url(self):
         return reverse("api_salesrecord", kwargs={"pk": self.id})
 

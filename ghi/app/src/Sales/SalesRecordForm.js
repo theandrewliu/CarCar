@@ -23,27 +23,48 @@ class SalesRecordForm extends React.Component{
     async componentDidMount(){
         const sales_personUrl = 'http://localhost:8090/api/salesperson/'
         const customerUrl = 'http://localhost:8090/api/customer/'
-        const automobile_Url = '	http://localhost:8100/api/automobiles/'
+        const automobile_Url = 'http://localhost:8100/api/automobiles/'
 
         const response = await fetch(sales_personUrl)
+        const responses = await fetch(customerUrl)
+        const responded = await fetch(automobile_Url)
+
         if(response.ok){
             const data = await response.json();
 
-
             this.setState({
-                customer: data.customer,
-                salesperson: data.salesperson,
-                automobiles: data.automobiles
+                salespersons: data.salesperson
             })
         }
+
+        if(responses.ok){
+            const data = await responses.json();
+
+            this.setState({
+                customers: data.customer
+            })
+            console.log("ANIME", data.customer)
+        }
+
+    //     if(responded.ok){
+    //         const data = await responded.json();
+
+    //         this.setState({
+    //             automobile: data.automobiles
+    //         })
+    //     }
     }
 
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
         delete data.salespersons
-        delete data.customers
-        delete data.automobile
+        delete data.salesperson
+        // delete data.customers
+        // delete data.automobiles
+        // delete data.automobile
+        // delete data.customer
+
 
         const sales_recordUrl = 'http://localhost:8090/api/salesrecord/';
         const fetchConfig = {
@@ -63,7 +84,7 @@ class SalesRecordForm extends React.Component{
                 salesprice: '',
                 automobiles: '',
             });
-        }
+        };
     }
 
 
