@@ -62,7 +62,7 @@ function App(props) {
           </Route>
           <Route path="salesrecord">
             <Route index element={<SalesRecordList salesrecord={props.salesrecord} />} />
-            <Route path="salesrecord/new" element={<SalesRecordForm />}/>
+            <Route path="new" element={<SalesRecordForm />}/>
           </Route>
         </Routes>
       </div>

@@ -29,11 +29,10 @@ class SalesPersonForm extends React.Component{
         if(response.ok){
             const new_salesperson = await response.json();
             console.log(new_salesperson);
-            const cleared = {
+            this.setState({
                 name: '',
                 employee_id: ''
-            };
-            this.setState(cleared);
+            });
         }
     }
 

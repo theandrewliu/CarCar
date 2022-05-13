@@ -19,7 +19,6 @@ function SalesRecordList(props) {
       </thead>
       <tbody>
         {props.salesrecord.map(salesrecords => {
-          console.log("ANIME", salesrecords)
           return (
             <tr key={salesrecords.id}>
               <td>{ salesrecords.salesperson}</td>

@@ -5,9 +5,12 @@ class SalesRecordForm extends React.Component{
         super(props)
         this.state = {
             salesperson: '',
+            salespersons: [],
             customer: '',
+            customers: [],
             salesprice: '',
             automobiles: '',
+            automobile: [],
         };
 
         this.handleSalesPersonChange = this.handleSalesPersonChange.bind(this);
@@ -17,10 +20,30 @@ class SalesRecordForm extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);   
     }
 
+    async componentDidMount(){
+        const sales_personUrl = 'http://localhost:8090/api/salesperson/'
+        const customerUrl = 'http://localhost:8090/api/customer/'
+        const automobile_Url = '	http://localhost:8100/api/automobiles/'
+
+        const response = await fetch(sales_personUrl)
+        if(response.ok){
+            const data = await response.json();
+
+
+            this.setState({
+                customer: data.customer,
+                salesperson: data.salesperson,
+                automobiles: data.automobiles
+            })
+        }
+    }
+
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
-
+        delete data.salespersons
+        delete data.customers
+        delete data.automobile
 
         const sales_recordUrl = 'http://localhost:8090/api/salesrecord/';
         const fetchConfig = {
@@ -34,13 +57,12 @@ class SalesRecordForm extends React.Component{
         if(response.ok){
             const new_salesrecord = await response.json();
             console.log(new_salesrecord);
-            const cleared = {
+            this.setState({
                 salesperson: '',
                 customer: '',
                 salesprice: '',
                 automobiles: '',
-            };
-            this.setState(cleared);
+            });
         }
     }
 
@@ -68,30 +90,30 @@ class SalesRecordForm extends React.Component{
             <div className="row">
                 <div className="offset-3 col-6">
                     <div className="shadow p-4 mt-4">
-                        <h1>Add a new Hat</h1>
+                        <h1>Add a new Car</h1>
                         <form onSubmit={this.handleSubmit} id="create-form">
                         <div className="mb-3">
-                            <select onChange={this.handleSalesPersonChange} required name="salesperson" id="salesperson" className="form-select">
+                            <select onChange={this.handleSalesPersonChange} value={this.state.salesperson} required name="salesperson" id="salesperson" className="form-select">
                             <option value="">Sales Person</option>
-                            {this.state.salesperson.map(salespersons => {
+                            {this.state.salespersons.map(salesperson => {
                                 return (
-                                <option key={salespersons.id} value={salespersons.id}>{salespersons.name}</option>
-                                )
+                                <option key={salesperson.id} value={salesperson.id}>{salesperson.name}</option>
+                                );
                             })}
                             </select>
                         </div>
                         <div className="mb-3">
-                            <select onChange={this.handleCustomerChange} required name="customer" id="customer" className="form-select">
+                            <select onChange={this.handleCustomerChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
                             <option value="">Customer</option>
-                            {this.state.customer.map(customers => {
+                            {this.state.customers.map(customer => {
                                 return (
-                                <option key={customers.id} value={customers.id}>{customers.names}</option>
+                                <option key={customer.id} value={customer.id}>{customer.names}</option>
                                 )
                             })}
                             </select>
                         </div>
                         <div className="mb-3">
-                            <select onChange={this.handleAutomobilesChange} required name="automobiles" id="vin" className="form-select">
+                            <select onChange={this.handleAutomobilesChange} value={this.state.automobiles} required name="automobiles" id="vin" className="form-select">
                             <option value="">Automobiles</option>
                             {this.state.automobile.map(automobiles => {
                                 return (
