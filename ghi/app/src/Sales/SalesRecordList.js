@@ -1,7 +1,9 @@
 
-
 function SalesRecordList(props) {
+  console.log('ANIME', props.salesrecord)
     return(
+    <div className="container">
+      <h2 className="display-5 fw-bold">List of Sales</h2>
       <table className="table table-striped">
       <thead>
         <tr>
@@ -16,15 +18,18 @@ function SalesRecordList(props) {
         {props.salesrecord.map(salesrecords => {
           return (
             <tr key={salesrecords.id}>
-              <td>{ salesrecords.salesperson}</td>
-              <td>{ salesrecords.customer}</td>
-              <td>{ salesrecords.automobiles}</td>
+              <td>{ salesrecords.salesperson.name}</td>
+              <td>{ salesrecords.salesperson.employee_id}</td>
+              <td>{ salesrecords.customer.name}</td>
+              <td>{ salesrecords.automobiles.vin}</td>
               <td>{ salesrecords.salesprice}</td>
             </tr>
           );
         })}
       </tbody>
     </table>
-  );
+    </div>
+  ); 
+
 }
 export default SalesRecordList

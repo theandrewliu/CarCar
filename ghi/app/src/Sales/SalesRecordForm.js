@@ -105,7 +105,7 @@ class SalesRecordForm extends React.Component{
                         <form onSubmit={this.handleSubmit} id="create-form">
                         <div className="mb-3">
                             <select onChange={this.handleSalesPersonChange} value={this.state.salesperson} required name="salesperson" id="salesperson" className="form-select">
-                            <option value="">Sales Person</option>
+                            <option value="">Associate</option>
                             {this.state.salespersons.map(salesperson => {
                                 return (
                                 <option key={salesperson.id} value={salesperson.id}>{salesperson.name}</option>
@@ -124,11 +124,11 @@ class SalesRecordForm extends React.Component{
                             </select>
                         </div>
                         <div className="mb-3">
-                            <select onChange={this.handleAutomobilesChange} value={this.state.automobiles} required name="automobiles" id="vin" className="form-select">
+                            <select onChange={this.handleAutomobilesChange} value={this.state.autos} required name="automobiles" id="vin" className="form-select">
                             <option value="">Automobiles</option>
                             {this.state.auto.map(automobiles => {
                                 return (
-                                <option key={automobiles.vin} value={automobiles.vin}>{automobiles.vin}</option>
+                                <option key={automobiles.vin} value={automobiles.vin}>{automobiles.model.name}</option>
                                 )
                             })}
                             </select>

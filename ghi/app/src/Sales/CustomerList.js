@@ -2,7 +2,6 @@
 
 function CustomerList(props) {
     return(
-
     <table className="table table-striped">
       <thead>
         <tr>

@@ -60,8 +60,8 @@ class SalesPersonForm extends React.Component{
                             <label htmlFor="name">Name</label>
                         </div>
                         <div className="form-floating mb-3">
-                            <input onChange={this.handleEmployee_idChange} placeholder="Employee_id" required type="number" name="employeeid" id="employeeid" className="form-control" />
-                            <label htmlFor="employeeid">Employee Id</label>
+                            <input onChange={this.handleEmployee_idChange} placeholder="Employee_id" required type="number" name="employee_id" id="employee_id" className="form-control" />
+                            <label htmlFor="employee_id">Employee Id</label>
                         </div>
                         <button className="btn btn-primary">Create</button>
                         </form>
